@@ -6,7 +6,7 @@ socket.on('connection', function () {
 
     socket.emit('createMessage', {
         to: 'Harvey',
-        text: 'Hi, whatssup!!'
+        text: 'Hi, whatssup!!!'
     });
 });
 
