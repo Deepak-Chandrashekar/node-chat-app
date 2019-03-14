@@ -12,12 +12,28 @@ var io = socketIO(server);
 
 app.use(express.static(publicPath));
 
-io.on('connection', (socket) => {
-    console.log('New user is connected')
+io.on('connect', (socket) => {
+    console.log('New user is connected');
+
+    // socket.emit('newEmail', {
+    //     from: 'abc@gmail.com',
+    //     text: 'Hello world',
+    //     created: '17:58'
+    // });
+
+    socket.emit('newMessage', {
+        from: 'Deepak',
+        text: 'Hey there!',
+        createdAt: '12:22'
+    });
 
 
     socket.on('disconnect', () => {
         console.log('User is disconnected');
+    });
+
+    socket.on('createMessage', (message) => {
+        console.log(message);
     });
 });
 
