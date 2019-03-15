@@ -21,3 +21,11 @@ socket.on('newMessage', function (message) {
     console.log('New Message', message);
 
 });
+
+socket.emit('createMessage', {
+    from: 'frank',
+    text: 'Hello'
+}, function (serverMessage) {
+    console.log(serverMessage);
+});
+
