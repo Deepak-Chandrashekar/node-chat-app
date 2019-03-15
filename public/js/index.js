@@ -1,13 +1,15 @@
 var socket = io();
 
-
-socket.on('connection', function () {
+/**
+ * Make sure to give as "connect" in socket.on method to establish the initial connection 
+ */
+socket.on('connect', function () {
     console.log('Connected to server');
 
-    socket.emit('createMessage', {
-        to: 'Harvey',
-        text: 'Hi, whatssup!!!'
-    });
+    // socket.emit('createMessage', {
+    //     to: 'Harvey',
+    //     text: 'Hi, whatssup!!!'
+    // });
 });
 
 socket.on('disconnect', function () {
