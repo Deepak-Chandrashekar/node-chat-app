@@ -3,7 +3,7 @@ const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
 
-
+const { generateMessage } = require('./utils/message');
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
 var app = express();
@@ -27,28 +27,23 @@ io.on('connect', (socket) => {
     //     createdAt: '12:22'
     // });
 
-    socket.emit('newMessage', { //socket.emit is used to send message as soon as we open browser(i.e as soon as client-server connection is established),
-        from: 'Admin',          // we should enter the specific word(newMessage) else we are not able to see it on browser.
-        text: 'Welcome to chat app'
-    });
-    socket.broadcast.emit('newMessage', {
-        from: 'Admin',
-        text: 'New user joined',
-        createdAt: new Date().getTime()
-    })
+    /** 
+     * socket.emit is used to send message as soon as we open browser(i.e as soon as client-server connection is established),
+     * we should enter the specific word(newMessage) else we are not able to see it on browser.* */
+
+    socket.emit('newMessage', generateMessage('Admin', 'Welcome to chat app'));
+
+    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user has joined'));
 
 
     socket.on('disconnect', () => {
         console.log('User is disconnected');
     });
 
+
     socket.on('createMessage', (message) => {// socket.on is used to send messages to a particular event name(i.e createMessage in this case)
         console.log(message);
-        // io.emit('newMessage', {
-        //     from: message.from,
-        //     text: message.text,
-        //     createdAt: new Date().getTime()
-        // });
+        io.emit('newMessage', generateMessage(message.from, message.text));
     });
 });
 
