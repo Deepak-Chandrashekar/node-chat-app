@@ -28,8 +28,12 @@ io.on('connect', (socket) => {
     // });
 
     /** 
+     * NOTE:- socket.emit work different in server
      * socket.emit is used to send message as soon as we open browser(i.e as soon as client-server connection is established),
-     * we should enter the specific word(newMessage) else we are not able to see it on browser.* */
+     * we should enter the specific word(newMessage) else we are not able to see it on browser.*
+     * 
+     *  */
+
 
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to chat app'));
 
