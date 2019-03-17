@@ -50,6 +50,13 @@ io.on('connect', (socket) => {
         io.emit('newMessage', generateMessage(message.from, message.text));
         callback('This is from server');
     });
+
+    socket.on('createLocationMessage', (coords) => {
+        io.emit('newLocationMessage', generateLocationMessage('Admin', `${coords.latitude}, ${coords.longitude}`));
+    })
+
+
+
 });
 
 
@@ -57,6 +64,6 @@ io.on('connect', (socket) => {
 server.listen(port, () => {
     console.log(`started on ${port}`)
 
-})
+});
 
 
