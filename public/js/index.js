@@ -30,7 +30,7 @@ socket.on('newMessage', function (message) {
     jQuery('#messages').append(li);
 });
 
-socket.on('newLocationMessage', (locationMessage) => {
+socket.on('newLocationMessage', function (locationMessage) {
     var li = jQuery('<li></li>');
     var a = jQuery('<a target="_blank">My current location</a>');
     li.text(`${locationMessage.from}: `);
