@@ -60,9 +60,9 @@ jQuery('#message-form').on('submit', function (e) {
 
 var locationButton = jQuery('#send-location');
 locationButton.on('click', function () {
-    if (!navigator.geoloction) {
-        return alert('geolocation not supported by your browser.')
-    }
+    // if (!navigator.geoloction) {
+    //     return alert('geolocation not supported by your browser.')
+    // }
 
     navigator.geolocation.getCurrentPosition(function (position) {
         socket.emit('createLocationMessage', {
