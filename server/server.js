@@ -48,11 +48,12 @@ io.on('connect', (socket) => {
     socket.on('createMessage', (message, callback) => {// socket.on is used to send messages to a particular event name(i.e createMessage in this case)
         console.log('createMessage', message);
         io.emit('newMessage', generateMessage(message.from, message.text));
-        callback('This is from server');
+        callback();
     });
 
     socket.on('createLocationMessage', (coords) => {
-        io.emit('newLocationMessage', generateLocationMessage('Admin', `${coords.latitude}, ${coords.longitude}`));
+        console.log(coords.latitude, coords.longitude)
+        io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
     })
 
 
